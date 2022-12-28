@@ -1,0 +1,33 @@
+<template>
+  <div id="app">
+    <h2>{{date}}</h2>
+    <p>I drank {{cupsOfWater}} cups of water today 🥤</p>
+    <button @click="drinkCup">Drink a cup</button>
+    <p v-if='cupsOfWater > 0'>I drank the last cup at {{lastCup}}</p>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      cupsOfWater: 0,
+      date: '',
+      lastCup: ''
+    };
+  },
+  methods: {
+    drinkCup() {
+      this.cupsOfWater++
+    }
+  },
+  watch: {
+    cupsOfWater: function (val) {
+      this.lastCup = new Date().toTimeString()
+    }
+  },
+  mounted(){
+    this.date = new Date().toDateString()
+  }
+};
+</script>
